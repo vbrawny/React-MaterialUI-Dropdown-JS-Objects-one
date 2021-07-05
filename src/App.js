@@ -33,22 +33,40 @@ export default function App() {
 
   const handleChange = (event) => {
     setSelectedCar(event.target.value);
+    console.log("--selectedCar--", selectedCar);
   };
+
+  const getCarIndex = (id) => {
+    for (let i = 0; i < allCars.length; i++) {
+      if (allCars[i].id === id) {
+        return i;
+      }
+    }
+    return "";
+  };
+
   return (
     <div className="App">
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label">My Car</InputLabel>
-        <Select
+        {/* <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={selectedCar}
+          onChange={handleChange}
+          label="My Car"
+        > */}
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          value={allCars[getCarIndex(selectedCar.id)]}
           onChange={handleChange}
           label="My Car"
         >
           {allCars.map((car) => {
             return (
               <MenuItem key={car.id} value={car}>
-                car.name
+                {car.name}
               </MenuItem>
             );
           })}
