@@ -16,7 +16,17 @@ const useStyles = makeStyles({
 });
 
 export default function App() {
-  let myCar = "BMW";
+  // let myCar ="BMW";
+  let myCar = {
+    id: 1,
+    name: "BMW"
+  };
+
+  const allCars = [
+    { id: 1, name: "BMW" },
+    { id: 2, name: "BENZ" },
+    { id: 3, name: "AUDI" }
+  ];
   const classes = useStyles();
 
   const [selectedCar, setSelectedCar] = useState(myCar);
@@ -35,12 +45,19 @@ export default function App() {
           onChange={handleChange}
           label="My Car"
         >
-          <MenuItem value={"BMW"}>BMW</MenuItem>
+          {allCars.map((car) => {
+            return (
+              <MenuItem key={car.id} value={car}>
+                car.name
+              </MenuItem>
+            );
+          })}
+          {/* <MenuItem value={"BMW"}>BMW</MenuItem>
           <MenuItem value={"BENZ"}>BENZ</MenuItem>
-          <MenuItem value={"AUDI"}>AUDI</MenuItem>
+          <MenuItem value={"AUDI"}>AUDI</MenuItem> */}
         </Select>
       </FormControl>
-      {"Selected Car: " + selectedCar}
+      {"Selected Car: " + selectedCar.name}
     </div>
   );
 }
